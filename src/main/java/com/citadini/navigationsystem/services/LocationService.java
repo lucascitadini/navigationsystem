@@ -46,7 +46,7 @@ public class LocationService {
 		List<BaseStation> baseStations = baseStationService.findAll();
 		List<BaseStationCommunication> baseStationCommunications = new ArrayList<BaseStationCommunication>();
 		for (BaseStation baseStation : baseStations) {
-			double distance = distance(baseStation, mobileLocationDto.getX(), mobileLocationDto.getY());
+			float distance = distance(baseStation, mobileLocationDto.getX(), mobileLocationDto.getY());
 			if (distance <= baseStation.getDetectionRadiusInMeters()) {
 				baseStationCommunications.add(new BaseStationCommunication(mobileStation, baseStation, distance));
 			}
@@ -54,21 +54,21 @@ public class LocationService {
 		return baseStationCommunications;
 	}
 
-	private double distance(BaseStation baseStation, double locationLatitude, double locationLongitude) {
+	private float distance(BaseStation baseStation, double locationLatitude, double locationLongitude) {
 
 		final int RADIUS_EARTH = 6371; // Radius of the earth in kilometers
 
-		Double latDistance = deg2rad(locationLatitude - baseStation.getLatitude());
-		Double lonDistance = deg2rad(locationLongitude - baseStation.getLongitude());
+		Float latDistance = deg2rad(locationLatitude - baseStation.getLatitude()).floatValue();
+		Float lonDistance = deg2rad(locationLongitude - baseStation.getLongitude()).floatValue();
 		Double angle = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
 				+ Math.cos(deg2rad(baseStation.getLatitude())) * Math.cos(deg2rad(locationLatitude))
 						* Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
 		Double c = 2 * Math.atan2(Math.sqrt(angle), Math.sqrt(1 - angle));
-		double distance = RADIUS_EARTH * c * 1000; // convert to meters
-		return distance;
+		Double distance = RADIUS_EARTH * c * 1000; // convert to meters
+		return distance.floatValue();
 	}
 
-	private double deg2rad(double deg) {
+	private Double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
 	}
 }

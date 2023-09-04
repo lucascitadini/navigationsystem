@@ -2,12 +2,14 @@ package com.citadini.navigationsystem.dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CommunicationReportDto {
 	@JsonProperty(value = "mobile_station_id")
 	private String mobileStationId;
 	private float distance;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
 	private LocalDateTime timestamp;
 	
 	public CommunicationReportDto() {

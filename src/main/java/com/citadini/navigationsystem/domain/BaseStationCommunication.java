@@ -19,10 +19,10 @@ public class BaseStationCommunication implements Serializable {
 	
 	public BaseStationCommunication() { }
 
-	public BaseStationCommunication(MobileStation mobileStation, BaseStation baseStation, Double distance) {
+	public BaseStationCommunication(MobileStation mobileStation, BaseStation baseStation, float distance) {
 		super();
 		this.id = new BaseStationCommunicationPK(baseStation, mobileStation);
-		this.distance = distance.floatValue();
+		this.distance = distance;
 		this.timestamp = LocalDateTime.now();
 	}
 

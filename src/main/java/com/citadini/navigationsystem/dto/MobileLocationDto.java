@@ -8,16 +8,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class MobileLocationDto {
 	@JsonIgnore
 	private String mobileStationId;
-	
-	@Max(value = 90, message="Latitude (X) must be less than 90")
-	@Min(value = -90, message="Latitude (X) must be greater than -90")
+
+	@Max(value = 90, message = "Latitude (X) must be less than 90")
+	@Min(value = -90, message = "Latitude (X) must be greater than -90")
 	private float x;
 
-	@Max(value = 180, message="Latitude (X) must be less than 180")
-	@Min(value = -180, message="Latitude (X) must be greater than -180")
+	@Max(value = 180, message = "Latitude (X) must be less than 180")
+	@Min(value = -180, message = "Latitude (X) must be greater than -180")
 	private float y;
-	
-	public MobileLocationDto() { }
+
+	public MobileLocationDto() {
+	}
+
+	public MobileLocationDto(String mobileStationId, float x, float y) {
+		super();
+		this.mobileStationId = mobileStationId;
+		this.x = x;
+		this.y = y;
+	}
 
 	public String getMobileStationId() {
 		return mobileStationId;
